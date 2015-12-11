@@ -1,21 +1,6 @@
-﻿///////////////////////////////////////////////////////////////////////////////
-// Copyright (c) ENikS.  All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0  ( the  "License" );  you may 
-// not use this file except in compliance with the License.  You may  obtain  a 
-// copy of the License at
-//
-//   http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required  by  applicable  law  or  agreed  to  in  writing,  software 
-// distributed under the License is distributed on an "AS  IS"  BASIS,  WITHOUT
-// WARRANTIES OR CONDITIONS  OF  ANY  KIND, either express or implied.  See the 
-// License for the specific  language  governing  permissions  and  limitations 
-// under the License.
-
+import "babel-polyfill";
 import {assert} from "chai";
-import {asEnumerable, Range} from "../src/linq-ts";
-
+import {asEnumerable, Range} from "ts-linq";
 
 var jsn = [
     { "ids": [11, 21, 31], "name": "d" },
@@ -28,7 +13,7 @@ describe('Testing LINQ -', function () {
 
     var fruits = ["grape",  "passionfruit",
                   "banana", "mango",
-                  "orange", "raspberry", 
+                  "orange", "raspberry",
                   "apple",  "blueberry",
                   "appla",];
 
@@ -163,7 +148,7 @@ describe('Testing LINQ -', function () {
     it('GroupJoin()', function () {
         var iterable = asEnumerable(people)
             .GroupJoin(pets,
-                       person => person, 
+                       person => person,
                        pet => pet.Owner,
                        (person, petCollection) => {
                            return {
@@ -500,7 +485,7 @@ describe('Testing LINQ -', function () {
         assert.equal(4, asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).SkipWhile(a=> a < 4).FirstOrDefault());
 
         var amounts = [
-            5000, 2500, 9000, 8000, 
+            5000, 2500, 9000, 8000,
             6500, 4000, 1500, 5500 ];
 
         var iterable = asEnumerable(amounts).SkipWhile((amount, index) => amount > index * 1000);
@@ -568,50 +553,3 @@ describe('Testing LINQ -', function () {
     });
 
 });
-
-describe('Enumerable - ', function () {
-
-    it('GetEnumerator()', function () {
-
-        var enumerable = asEnumerable(jsn).SelectMany(a => a.ids, b => b);
-        var enumerator = enumerable.GetEnumerator();
-
-        assert.isTrue(enumerator.MoveNext());
-        assert.equal(11, enumerator.Current);
-        assert.isTrue(enumerator.MoveNext());
-        assert.equal(21, enumerator.Current);
-        assert.isTrue(enumerator.MoveNext());
-        assert.equal(31, enumerator.Current);
-        assert.isTrue(enumerator.MoveNext());
-        assert.equal(12, enumerator.Current);
-        assert.isTrue(enumerator.MoveNext());
-        assert.equal(22, enumerator.Current);
-        assert.isTrue(enumerator.MoveNext());
-        assert.equal(32, enumerator.Current);
-        assert.isTrue(enumerator.MoveNext());
-        assert.equal(13, enumerator.Current);
-        assert.isTrue(enumerator.MoveNext());
-        assert.equal(23, enumerator.Current);
-        assert.isTrue(enumerator.MoveNext());
-        assert.equal(33, enumerator.Current);
-        assert.isTrue(enumerator.MoveNext());
-        assert.equal(14, enumerator.Current);
-        assert.isTrue(enumerator.MoveNext());
-        assert.equal(24, enumerator.Current);
-        assert.isTrue(enumerator.MoveNext());
-        assert.equal(34, enumerator.Current);
-        assert.isFalse(enumerator.MoveNext());
-    });
-
-    it('Enumerate()', function () {
-
-        var enumerable = Range(0, 100);
-        var enumerator = enumerable.GetEnumerator();
-        var index = 0
-        while (enumerator.MoveNext()) {
-            assert.equal(index++, enumerator.Current);
-        }
-    });
-
-});
-
