@@ -41,7 +41,7 @@ module TsLinq
             return resultSelector(result);
         }
 
-        public All(predicate: (T) => boolean = Constants.TRUE_FN)
+        public All(predicate: (T: T) => boolean = Constants.TRUE_FN)
         {
             var result, iterator: Iterator<T> = this[Symbol.iterator]();
 
@@ -56,7 +56,7 @@ module TsLinq
             return true;
         }
 
-        public Any(predicate?: (T) => boolean)
+        public Any(predicate?: (T: T) => boolean)
         {
             var result, iterator: Iterator<T> = this[Symbol.iterator]();
             // Check if at least one exist
@@ -77,7 +77,7 @@ module TsLinq
             return false;
         }
 
-        public Average(func: (T) => number = Constants.SELF_FN): number
+        public Average(func: (T: T) => number = Constants.SELF_FN): number
         {
             var result, sum = 0, count = 0;
             var iterator = this[Symbol.iterator]();
@@ -106,7 +106,7 @@ module TsLinq
             return false;
         }
 
-        public Count(predicate: (T) => boolean = Constants.TRUE_FN): number
+        public Count(predicate: (T: T) => boolean = Constants.TRUE_FN): number
         {
             var result, count = 0;
             var iterator = this[Symbol.iterator]();
@@ -122,7 +122,7 @@ module TsLinq
             return count;
         }
 
-        public Max(transform: (T) => number = Constants.SELF_FN): number
+        public Max(transform: (T: T) => number = Constants.SELF_FN): number
         {
             var result, value, max, hasValue = false;
             var iterator = this[Symbol.iterator]();
@@ -147,7 +147,7 @@ module TsLinq
             return max;
         }
 
-        public Min(transform: (T) => number = Constants.SELF_FN): number
+        public Min(transform: (T: T) => number = Constants.SELF_FN): number
         {
             var result, value, min, hasValue = false;
             var iterator = this[Symbol.iterator]();
@@ -206,7 +206,7 @@ module TsLinq
             return Constants.DEFAULT_VALUE(typeof value); // Last good value
         }
 
-        public First(predicate: (T) => boolean = Constants.TRUE_FN): T
+        public First(predicate: (T: T) => boolean = Constants.TRUE_FN): T
         {
             var result;
             var iterator = this[Symbol.iterator]();
@@ -222,7 +222,7 @@ module TsLinq
             throw Constants.NOTHING_FOUND;
         }
 
-        public FirstOrDefault(predicate: (T) => boolean = Constants.TRUE_FN): T
+        public FirstOrDefault(predicate: (T: T) => boolean = Constants.TRUE_FN): T
         {
             var result, value;
             var iterator = this[Symbol.iterator]();
@@ -240,7 +240,7 @@ module TsLinq
             return Constants.DEFAULT_VALUE(typeof value); // Last good value
         }
 
-        public Last(predicate: (T) => boolean = Constants.TRUE_FN): T
+        public Last(predicate: (T: T) => boolean = Constants.TRUE_FN): T
         {
             var result, value, found = false;
             var iterator = this[Symbol.iterator]();
@@ -259,7 +259,7 @@ module TsLinq
             return value;
         }
 
-        public LastOrDefault(predicate: (T) => boolean = Constants.TRUE_FN): T
+        public LastOrDefault(predicate: (T: T) => boolean = Constants.TRUE_FN): T
         {
             var result, value, lastKnown, found = false;
             var iterator = this[Symbol.iterator]();
@@ -298,7 +298,7 @@ module TsLinq
             return true;
         }
 
-        public Single(predicate: (T) => boolean = Constants.TRUE_FN): T
+        public Single(predicate: (T: T) => boolean = Constants.TRUE_FN): T
         {
             var value, hasValue = false;
             var result, iterator = this[Symbol.iterator]();
@@ -324,7 +324,7 @@ module TsLinq
             throw Constants.NOTHING_FOUND;
         }
 
-        public SingleOrDefault(predicate: (T) => boolean = Constants.TRUE_FN): T
+        public SingleOrDefault(predicate: (T: T) => boolean = Constants.TRUE_FN): T
         {
             var value, lastKnown, hasValue = false;
             var result, iterator = this[Symbol.iterator]();
@@ -350,7 +350,7 @@ module TsLinq
             return (hasValue) ? value : Constants.DEFAULT_VALUE(typeof lastKnown);
         }
 
-        public Sum(transform: (T) => number = Constants.SELF_FN): number
+        public Sum(transform: (T: T) => number = Constants.SELF_FN): number
         {
             var result, sum: number = 0;
             var iterator = this[Symbol.iterator]();
@@ -376,7 +376,7 @@ module TsLinq
             return array;
         }
 
-        public ToDictionary<TKey, TElement>(keySelector: (T) => TKey, elementSelector: (T) => TElement = Constants.SELF_FN): Map<TKey, TElement>
+        public ToDictionary<TKey, TElement>(keySelector: (T: T) => TKey, elementSelector: (T: T) => TElement = Constants.SELF_FN): Map<TKey, TElement>
         {
             var dictionary = new Map<TKey, TElement>();
             var result, iterator = this[Symbol.iterator]();
@@ -451,7 +451,7 @@ module TsLinq
             ));
         }
 
-        public GroupBy<K, E, R>(selKey: (T) => K, selElement: (T) => E, selResult: (a: K, b: Iterable<E>) => R = Constants.DEFAULT_GROUPING): Linq<R>
+        public GroupBy<K, E, R>(selKey: (T: T) => K, selElement: (T: T) => E, selResult: (a: K, b: Iterable<E>) => R = Constants.DEFAULT_GROUPING): Linq<R>
         {
             var result: IteratorResult<T>;
             var iterator: Iterator<T> = this[Symbol.iterator]();
@@ -550,7 +550,7 @@ module TsLinq
             ));
         }
 
-        public OrderBy<K>(keySelect: (T) => K = Constants.SELF_FN, equal: (a: K, b: K) => number = (a, b) => <any>a - <any>b): Linq<T>
+        public OrderBy<K>(keySelect: (T: T) => K = Constants.SELF_FN, equal: (a: K, b: K) => number = (a, b) => <any>a - <any>b): Linq<T>
         {
             return new OrderedLinq<T>
             (
@@ -560,7 +560,7 @@ module TsLinq
             );
         }
 
-        public OrderByDescending<K>(keySelect: (T) => K = Constants.SELF_FN, equal: (a: K, b: K) => number = (a, b) => <any>a - <any>b): Linq<T>
+        public OrderByDescending<K>(keySelect: (T: T) => K = Constants.SELF_FN, equal: (a: K, b: K) => number = (a, b) => <any>a - <any>b): Linq<T>
         {
             return new OrderedLinq<T>
             (
@@ -570,7 +570,7 @@ module TsLinq
             );
         }
 
-        public ThenBy<K>(keySelect: (T) => K = Constants.SELF_FN, equal: (a: K, b: K) => number = (a, b) => <any>a - <any>b): Linq<T>
+        public ThenBy<K>(keySelect: (T: T) => K = Constants.SELF_FN, equal: (a: K, b: K) => number = (a, b) => <any>a - <any>b): Linq<T>
         {
             if (this instanceof OrderedLinq)
             {
@@ -595,7 +595,7 @@ module TsLinq
             }
         }
 
-        public ThenByDescending<K>(keySelect: (T) => K = Constants.SELF_FN, equal: (a: K, b: K) => number = (a, b) => <any>a - <any>b): Linq<T>
+        public ThenByDescending<K>(keySelect: (T: T) => K = Constants.SELF_FN, equal: (a: K, b: K) => number = (a, b) => <any>a - <any>b): Linq<T>
         {
             if (this instanceof OrderedLinq)
             {
@@ -652,7 +652,7 @@ module TsLinq
             ));
         }
 
-        public Select<V>(transform: (T, number?) => V): Linq<V>
+        public Select<V>(transform: (T: T, number?) => V): Linq<V>
         {
             return new Linq<V>(this, () => new Iterators.SelectIteratror
             (
@@ -661,7 +661,7 @@ module TsLinq
             ));
         }
 
-        public SelectMany<S, V>(selector: (T, number) => Iterable<S> = Constants.SELF_FN, result: (T, S) => V = Constants.SELF_FN): Linq<V>
+        public SelectMany<S, V>(selector: (T: T, number) => Iterable<S> = Constants.SELF_FN, result: (T: T, S) => V = Constants.SELF_FN): Linq<V>
         {
             return new Linq<V>(this, () => new Iterators.SelectManyIteratror
             (
@@ -682,7 +682,7 @@ module TsLinq
             ));
         }
 
-        public SkipWhile(predicate: (T, number) => boolean = (a, n) => false): Linq<T>
+        public SkipWhile(predicate: (T: T, number) => boolean = (a, n) => false): Linq<T>
         {
             return new Linq<T>(this, () => new Iterators.SkipIterator
             (
@@ -700,7 +700,7 @@ module TsLinq
             ));
         }
 
-        public TakeWhile(predicate: (T, number) => boolean): Linq<T>
+        public TakeWhile(predicate: (T: T, number) => boolean): Linq<T>
         {
             return new Linq<T>(this, () => new Iterators.TakeIterator
             (
@@ -718,7 +718,7 @@ module TsLinq
             ));
         }
 
-        public Where(predicate: (T, number?) => Boolean = Constants.TRUE_FN): Linq<T>
+        public Where(predicate: (T: T, number?) => Boolean = Constants.TRUE_FN): Linq<T>
         {
             return new Linq<T>(this, () => new Iterators.WhereIteratror
             (
@@ -727,7 +727,7 @@ module TsLinq
             ));
         }
 
-        public Zip<V, Z>(second: Iterable<V>, func: (T, V) => Z): Linq<Z>
+        public Zip<V, Z>(second: Iterable<V>, func: (T: T, V) => Z): Linq<Z>
         {
             return new Linq<Z>(this, () => new Iterators.ZipIteratror
             (
