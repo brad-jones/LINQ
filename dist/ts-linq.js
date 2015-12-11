@@ -725,7 +725,7 @@ var TsLinq;
             _classCallCheck(this, Linq);
 
             // Alias for above
-            this.ToMap = this.ToDictionary;
+            this.ToDictionary = this.ToMap;
             this._target = target;
             this._factory = factory;
             this._factoryArg = arg;
@@ -746,6 +746,21 @@ var TsLinq;
             value: function GetEnumerator() {
                 return new TsLinq.Enumerator(this[Symbol.iterator]());
             }
+            /**
+             * Applies an accumulator function over a sequence.The specified seed value
+             * is used as the initial accumulator value, and the specified function is
+             * used to select the result value.
+             *
+             * @param seed The initial accumulator value.
+             * @param func An accumulator function to be invoked on each element.
+             * @param resultSelector A function to transform the final accumulator value into the result value.
+             *
+             * @example
+             * var fruits = [ "apple", "mango", "orange", "passionfruit", "grape" ];
+             * var longestName = asEnumerable(fruits)
+             *                  .Aggregate("banana", (longest, next) => next.Length > longest.Length ? next : longest, fruit => fruit.ToUpper());
+             */
+
         }, {
             key: 'Aggregate',
             value: function Aggregate(seed, func) {
@@ -759,6 +774,16 @@ var TsLinq;
                 }
                 return resultSelector(result);
             }
+            /**
+             * Determines whether all elements of a sequence satisfy a condition.
+             *
+             * @returns True is all elements satisfy criteria.
+             * @param predicate A function to test each element for a condition.
+             *
+             * @example
+             *     var e:boolean = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).All((a) => a > 0);
+             */
+
         }, {
             key: 'All',
             value: function All() {
@@ -773,6 +798,17 @@ var TsLinq;
                 }
                 return true;
             }
+            /**
+             * Determines whether a sequence contains any elements or if predicate is
+             * present determines whether any element of a sequence satisfies a
+             * condition.
+             *
+             * @param predicate A function to test each element for a condition.
+             *
+             * @example
+             * var unvaccinated = asEnumerable(pets).Any(p => p.Vaccinated == false);
+             */
+
         }, {
             key: 'Any',
             value: function Any(predicate) {
@@ -790,6 +826,16 @@ var TsLinq;
                 }
                 return false;
             }
+            /**
+             * Computes the average of a sequence of Number values that are obtained by
+             * invoking a transform function on each element of the input sequence.
+             *
+             * @param func A transform function to apply to each element.
+             *
+             * @example
+             *     var e = asEnumerable(['5', '6', '7']).Average(a=>eval(a));
+             */
+
         }, {
             key: 'Average',
             value: function Average() {
@@ -805,6 +851,17 @@ var TsLinq;
                 }
                 return sum / count;
             }
+            /**
+             * Determines whether a sequence contains a specified element by using a
+             * specified Comparer.
+             *
+             * @param value The value to locate in the sequence.
+             * @param equal An equality comparer to compare values.
+             *
+             * @example
+             *     var e: boolean = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).Contains(0, (a) => a);
+             */
+
         }, {
             key: 'Contains',
             value: function Contains(value) {
@@ -821,6 +878,17 @@ var TsLinq;
                 }
                 return false;
             }
+            /**
+             * Returns the number of elements in a sequence.
+             * Returns a number that represents how many elements in the
+             * specified sequence satisfy a condition.
+             *
+             * @param predicate A function to test each element for a condition.
+             *
+             * @example
+             *     var e:number = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).Count((a) => a > 3)
+             */
+
         }, {
             key: 'Count',
             value: function Count() {
@@ -836,6 +904,16 @@ var TsLinq;
                 }
                 return count;
             }
+            /**
+             * Invokes a transform function on each element of a sequence and returns
+             * the maximum value.
+             *
+             * @param transform A transform function to apply to each element.
+             *
+             * @example
+             *     var e = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).Max();
+             */
+
         }, {
             key: 'Max',
             value: function Max() {
@@ -858,6 +936,15 @@ var TsLinq;
                 if (!hasValue) throw TsLinq.Constants.NO_ELEMENTS;
                 return max;
             }
+            /**
+             * Invokes a transform function on each element of a sequence and returns the minimum Decimal value.
+             *
+             * @param transform A transform function to apply to each element.
+             *
+             * @example
+             *     var e = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).Min()
+             */
+
         }, {
             key: 'Min',
             value: function Min() {
@@ -880,6 +967,15 @@ var TsLinq;
                 if (!hasValue) throw TsLinq.Constants.NO_ELEMENTS;
                 return min;
             }
+            /**
+             * Returns the element at a specified index in a sequence.
+             *
+             * @param index The zero-based index of the element to retrieve.
+             *
+             * @example
+             *     var e:number = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).ElementAt(3);
+             */
+
         }, {
             key: 'ElementAt',
             value: function ElementAt(index) {
@@ -893,6 +989,16 @@ var TsLinq;
                 }
                 throw "Argument Out Of Range";
             }
+            /**
+             * Returns the element at a specified index in a sequence or a default
+             * value if the index is out of range.
+             *
+             * @param index The zero-based index of the element to retrieve.
+             *
+             * @example
+             *     var e:number = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).ElementAtOrDefault(31);
+             */
+
         }, {
             key: 'ElementAtOrDefault',
             value: function ElementAtOrDefault(index) {
@@ -908,6 +1014,16 @@ var TsLinq;
                 }
                 return TsLinq.Constants.DEFAULT_VALUE(typeof value === 'undefined' ? 'undefined' : _typeof(value)); // Last good value
             }
+            /**
+             * Returns the first element in a sequence that satisfies a specified condition.
+             * Throws an exception if no matching element is found in source.
+             *
+             * @param predicate A function to test each element for a condition.
+             *
+             * @example
+             *     var e = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).First(a => a > 2);
+             */
+
         }, {
             key: 'First',
             value: function First() {
@@ -922,6 +1038,16 @@ var TsLinq;
                 }
                 throw TsLinq.Constants.NOTHING_FOUND;
             }
+            /**
+             * Returns the first element of the sequence that satisfies a condition or a
+             * default value if no such element is found.
+             *
+             * @param predicate A function to test each element for a condition.
+             *
+             * @example
+             *     var e = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).FirstOrDefault(a => a > 2);
+             */
+
         }, {
             key: 'FirstOrDefault',
             value: function FirstOrDefault() {
@@ -937,6 +1063,16 @@ var TsLinq;
                 }
                 return TsLinq.Constants.DEFAULT_VALUE(typeof value === 'undefined' ? 'undefined' : _typeof(value)); // Last good value
             }
+            /**
+             * Returns the last element of a sequence that satisfies a specified condition.
+             * Throws an exception if no matching element is found in source.
+             *
+             * @param predicate A function to test each element for a condition.
+             *
+             * @example
+             *     var e = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).Last();
+             */
+
         }, {
             key: 'Last',
             value: function Last() {
@@ -955,6 +1091,15 @@ var TsLinq;
                 if (!found) throw TsLinq.Constants.NOTHING_FOUND;
                 return value;
             }
+            /**
+             * Returns the last element of a sequence that satisfies a condition or a default value if no such element is found.
+             *
+             * @param predicate A function to test each element for a condition.
+             *
+             * @example
+             *     var e = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).LastOrDefault();
+             */
+
         }, {
             key: 'LastOrDefault',
             value: function LastOrDefault() {
@@ -974,6 +1119,17 @@ var TsLinq;
                 }
                 return found ? value : TsLinq.Constants.DEFAULT_VALUE(typeof lastKnown === 'undefined' ? 'undefined' : _typeof(lastKnown));
             }
+            /**
+             * Determines whether two sequences are equal by comparing their elements
+             * by using a specified IEqualityComparer<T>.
+             *
+             * @param other An IEnumerable<T> to compare to the first sequence.
+             * @param equal An IEqualityComparer<T> to use to compare elements.
+             *
+             * @example
+             *     var e:boolean = asEnumerable([0, 1, 2, 3]).SequenceEqual([0, 1, 2, 3]);
+             */
+
         }, {
             key: 'SequenceEqual',
             value: function SequenceEqual(other) {
@@ -993,6 +1149,15 @@ var TsLinq;
                 } while (!res1.done && !res2.done);
                 return true;
             }
+            /**
+             * Returns the only element of a sequence that satisfies a specified condition, and throws an exception if more than one such element exists.
+             *
+             * @param predicate A function to test an element for a condition.
+             *
+             * @example
+             *     var e = asEnumerable([4]).Single();
+             */
+
         }, {
             key: 'Single',
             value: function Single() {
@@ -1015,6 +1180,16 @@ var TsLinq;
                 if (hasValue) return value;
                 throw TsLinq.Constants.NOTHING_FOUND;
             }
+            /**
+             * Returns the only element of a sequence that satisfies a specified condition or a default value if no such element exists; this method
+             * Throws an exception if more than one element satisfies the condition.
+             *
+             * @param predicate A function to test an element for a condition.
+             *
+             * @example
+             *     var e = asEnumerable([4]).SingleOrDefault();
+             */
+
         }, {
             key: 'SingleOrDefault',
             value: function SingleOrDefault() {
@@ -1038,6 +1213,16 @@ var TsLinq;
                 }
                 return hasValue ? value : TsLinq.Constants.DEFAULT_VALUE(typeof lastKnown === 'undefined' ? 'undefined' : _typeof(lastKnown));
             }
+            /**
+             * Computes the sum of the sequence of Decimal values that are obtained by
+             * invoking a transform function on each element of the input sequence.
+             *
+             * @param transform A transform function to apply to each element.
+             *
+             * @example
+             *     var e = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).Sum();
+             */
+
         }, {
             key: 'Sum',
             value: function Sum() {
@@ -1051,6 +1236,13 @@ var TsLinq;
                 }
                 return sum;
             }
+            /**
+             * Converts Iterable to Array<T>
+             *
+             * @example
+             *     var e = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).ToArray();
+             */
+
         }, {
             key: 'ToArray',
             value: function ToArray() {
@@ -1062,9 +1254,18 @@ var TsLinq;
                 }
                 return array;
             }
+            /**
+             * Creates a Map< TKey, TValue > from an IEnumerable< T > according
+             * to a specified key selector function, a comparer, and an element selector
+             * function.
+             *
+             * @param keySelector A function to extract a key from each element.
+             * @param elementSelector A transform function to produce a result element value from each element.
+             */
+
         }, {
-            key: 'ToDictionary',
-            value: function ToDictionary(keySelector) {
+            key: 'ToMap',
+            value: function ToMap(keySelector) {
                 var elementSelector = arguments.length <= 1 || arguments[1] === undefined ? TsLinq.Constants.SELF_FN : arguments[1];
 
                 var dictionary = new Map();
@@ -1075,6 +1276,16 @@ var TsLinq;
                 }
                 return dictionary;
             }
+            /**
+             * Returns the elements of the specified sequence or the specified value in
+             * a singleton collection if the sequence is empty.
+             *
+             * @param defaultValue The value to return if the sequence is empty
+             *
+             * @example
+             *     var e:number = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).DefaultIfEmpty(0);
+             */
+
         }, {
             key: 'DefaultIfEmpty',
             value: function DefaultIfEmpty() {
@@ -1097,6 +1308,15 @@ var TsLinq;
                     });
                 });
             }
+            /**
+             * Concatenates two sequences.
+             *
+             * @param second The sequence to concatenate to the first sequence.
+             *
+             * @example
+             *     var enumerable = asEnumerable([3, 4, 5, 6, 7]).Concat([1,2,8]);
+             */
+
         }, {
             key: 'Concat',
             value: function Concat(second) {
@@ -1105,6 +1325,14 @@ var TsLinq;
                     return new TsLinq.Iterators.SelectManyIteratror(aggregate[Symbol.iterator](), TsLinq.Constants.SELF_FN, TsLinq.Constants.SELF_FN);
                 });
             }
+            /**
+             * Returns distinct elements from a sequence by using the default equality
+             * comparer to compare values.
+             *
+             * @example
+             *     var enumerable = asEnumerable([1, 1, 2, 2, 4, 5, 6, 7]).Distinct();
+             */
+
         }, {
             key: 'Distinct',
             value: function Distinct() {
@@ -1114,6 +1342,17 @@ var TsLinq;
                     return new TsLinq.Iterators.DistinctIteratror(_this18._target[Symbol.iterator]());
                 });
             }
+            /**
+             * Produces the set difference of two sequences by using the default equality comparer to compare values.
+             * This method returns those elements in first that do not appear in second.
+             * It does not also return those elements in second that do not appear in first.
+             *
+             * @param other An Iterable<T> whose elements that also occur in the first sequence will cause those elements to be removed from the returned sequence.
+             *
+             * @example
+             *     var enumerable = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).Except([2,3,5]);
+             */
+
         }, {
             key: 'Except',
             value: function Except(other) {
@@ -1129,6 +1368,19 @@ var TsLinq;
                     return new TsLinq.Iterators.IntersectIteratror(_this19._target[Symbol.iterator](), _set, true);
                 });
             }
+            /**
+             * Groups the elements of a sequence according to a specified key selector
+             * function and creates a result value from each group and its key. Elements
+             * of each group are projected by using a specified function.
+             *
+             * @param selKey A function to extract the key for each element.
+             * @param selElement A function to map each source element to an element in an Grouping<TKey, TElement>.
+             * @param selResult A function to create a result value from each group.
+             *
+             * @example
+             *   var e = asEnumerable(pets).GroupBy(pet => pet.Age, pet => pet)
+             */
+
         }, {
             key: 'GroupBy',
             value: function GroupBy(selKey, selElement) {
@@ -1154,6 +1406,24 @@ var TsLinq;
                     return new TsLinq.Iterators.GroupByIteratror(_map.keys(), selResult, _map);
                 });
             }
+            /**
+             * Correlates the elements of two sequences based on equality of keys and groups the results. The default equality comparer is used to compare keys.
+             *
+             * @param inner The sequence to join to the first sequence.
+             * @param outerKeySelector A function to extract the join key from each element of the first sequence.
+             * @param innerKeySelector A function to extract the join key from each element of the second sequence.
+             * @param resultSelector A function to create a result element from an element from the first sequence and a collection of matching elements from the second sequence.
+             *
+             * @example
+             *   var iterable = asEnumerable(people)
+             *       .GroupJoin(pets, person => person, pet => pet.Owner,
+             *                  (person, petCollection) => { return {
+             *                       Owner: person.Name,
+             *                       Pets: asEnumerable(petCollection) .Select(pet=> pet.Name);
+             *               };
+             *       });
+             */
+
         }, {
             key: 'GroupJoin',
             value: function GroupJoin(inner, oKeySelect, iKeySelect) {
@@ -1178,6 +1448,15 @@ var TsLinq;
                     return new TsLinq.Iterators.GroupJoinIteratror(_this20._target[Symbol.iterator](), oKeySelect, resultSelector, _map);
                 });
             }
+            /**
+             * Produces the intersection of two sequences.
+             *
+             * @param An Iterable<T> whose distinct elements that also appear in the first sequence will be returned.
+             *
+             * @example
+             *     var e = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).Intersect([1, 3, 5, 11, 23, 44]);
+             */
+
         }, {
             key: 'Intersect',
             value: function Intersect(other) {
@@ -1193,6 +1472,24 @@ var TsLinq;
                     return new TsLinq.Iterators.IntersectIteratror(_this21._target[Symbol.iterator](), _set);
                 });
             }
+            /**
+             * Correlates the elements of two sequences based on matching keys. A specified IEqualityComparer<T> is used to compare keys.
+             *
+             * @param inner The sequence to join to the first sequence.
+             * @param oSelector A function to extract the join key from each element of the first sequence.
+             * @param iSelector A function to extract the join key from each element of the second sequence.
+             * @param transform A function to create a result element from two matching elements.
+             *
+             * @example
+             *   var iterable =
+             *       asEnumerable(people).Join(pets,
+             *           person => person,
+             *           pet => pet.Owner,
+             *           (person, pet) => {
+             *               return person.Name + " - " + pet.Name;
+             *           });
+             */
+
         }, {
             key: 'Join',
             value: function Join(inner, oSelector, iSelector, transform) {
@@ -1202,6 +1499,16 @@ var TsLinq;
                     return new TsLinq.Iterators.JoinIteratror(_this22._target[Symbol.iterator](), inner[Symbol.iterator](), oSelector, iSelector, transform);
                 });
             }
+            /**
+             * Sorts the elements of a sequence in ascending order by using a specified  comparer.
+             *
+             * @param keySelect A function to extract a key from an element.
+             * @param equal An IComparer<T> to compare keys.
+             *
+             * @example
+             *     var e = asEnumerable(jsn).OrderBy(a=> a.name);
+             */
+
         }, {
             key: 'OrderBy',
             value: function OrderBy() {
@@ -1218,6 +1525,16 @@ var TsLinq;
                     return equal(keySelect(a), keySelect(b));
                 });
             }
+            /**
+             * Sorts the elements of a sequence in descending order by using a specified comparer.
+             *
+             * @param keySelect A function to extract a key from an element.
+             * @param equal An IComparer<T> to compare keys.
+             *
+             * @example
+             *     var e = asEnumerable(jsn).OrderByDescending(a=> a.name);
+             */
+
         }, {
             key: 'OrderByDescending',
             value: function OrderByDescending() {
@@ -1234,6 +1551,19 @@ var TsLinq;
                     return equal(keySelect(a), keySelect(b));
                 });
             }
+            /**
+             * Performs a subsequent ordering of the elements in a sequence in ascending order by using a specified comparer.
+             *
+             * @param keySelect A function to extract a key from an element.
+             * @param equal An IComparer<T> to compare keys.
+             *
+             * @example
+             *   var iterable: any = asEnumerable(fruits)
+             *                       .OrderBy(fruit=> fruit.length)
+             *                       .ThenBy(fruit=> fruit.charCodeAt(0))
+             *                       .ThenBy(fruit=> fruit.charCodeAt(4));
+             */
+
         }, {
             key: 'ThenBy',
             value: function ThenBy() {
@@ -1259,6 +1589,19 @@ var TsLinq;
                     });
                 }
             }
+            /**
+             * Performs a subsequent ordering of the elements in a sequence in descending order by using a specified comparer.
+             *
+             * @param keySelect A function to extract a key from an element.
+             * @param equal An IComparer<T> to compare keys.
+             *
+             * @example
+             *   var iterable: any = asEnumerable(fruits)
+             *                       .OrderBy(fruit=> fruit.length)
+             *                       .ThenByDescending(fruit=> fruit.charCodeAt(0))
+             *                       .ThenByDescending(fruit=> fruit.charCodeAt(4));
+             */
+
         }, {
             key: 'ThenByDescending',
             value: function ThenByDescending() {
@@ -1284,6 +1627,16 @@ var TsLinq;
                     });
                 }
             }
+            /**
+             * Returns count of numbers beginning from start
+             *
+             * @param start First value in sequence.
+             * @param count Number of elements to iteratel.
+             *
+             * @example
+             *     var sum = asEnumerable().Range(0, 7).Sum();
+             */
+
         }, {
             key: 'Range',
             value: function Range(start, count) {
@@ -1291,6 +1644,16 @@ var TsLinq;
                     return new TsLinq.Iterators.GeneratorIterator(start, count, true);
                 });
             }
+            /**
+             * Generates a sequence that contains one repeated value.
+             *
+             * @param start First value in sequence.
+             * @param count Number of elements to iteratel.
+             *
+             * @example
+             *     var sum = asEnumerable().Repeat("v", 7);
+             */
+
         }, {
             key: 'Repeat',
             value: function Repeat(element, count) {
@@ -1298,6 +1661,13 @@ var TsLinq;
                     return new TsLinq.Iterators.GeneratorIterator(element, count);
                 });
             }
+            /**
+             * Inverts the order of the elements in a sequence.
+             *
+             * @example
+             *     var e = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).Reverse();
+             */
+
         }, {
             key: 'Reverse',
             value: function Reverse() {
@@ -1308,6 +1678,15 @@ var TsLinq;
                     }, -1);
                 });
             }
+            /**
+             * Projects each element of a sequence into a new form by incorporating the element's index.
+             *
+             * @param transform A transform function to apply to each source element; the second parameter of the function represents the index of the source element.
+             *
+             * @example
+             * var array = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).Select((a, idx) => a * idx);
+             */
+
         }, {
             key: 'Select',
             value: function Select(transform) {
@@ -1317,6 +1696,17 @@ var TsLinq;
                     return new TsLinq.Iterators.SelectIteratror(_this23._target[Symbol.iterator](), transform);
                 });
             }
+            /**
+             * Projects each element of a sequence to an Iterable<T>, flattens the resulting sequences into one sequence, and invokes a result selector
+             * function on each element therein. The index of each source element is used in the intermediate projected form of that element.
+             *
+             * @param selector A transform function to apply to each source element; the second parameter of the function represents the index of the source element.
+             * @param result A transform function to apply to each element of the intermediate sequence.
+             *
+             * @example
+             *     var iterable = asEnumerable(jsn).SelectMany(a => a.ids, b => b);
+             */
+
         }, {
             key: 'SelectMany',
             value: function SelectMany() {
@@ -1329,6 +1719,16 @@ var TsLinq;
                     return new TsLinq.Iterators.SelectManyIteratror(_this24._target[Symbol.iterator](), selector, result);
                 });
             }
+            /**
+             * Bypasses a specified number of elements in a sequence and then returns
+             * the remaining elements.
+             *
+             * @param skip The number of elements to skip before returning the remaining elements.
+             *
+             * @example
+             *     var e = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).Skip(3);
+             */
+
         }, {
             key: 'Skip',
             value: function Skip(skip) {
@@ -1339,6 +1739,17 @@ var TsLinq;
                     return new TsLinq.Iterators.WhereIteratror(iterator, TsLinq.Constants.TRUE_FN);
                 });
             }
+            /**
+             * Bypasses elements in a sequence as long as a specified condition is true
+             * and then returns the remaining elements. The element's index is used in
+             * the logic of the predicate function.
+             *
+             * @param predicate A function to test each source element for a condition; the second parameter of the function represents the index of the source element.
+             *
+             * @example
+             *     var e = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).SkipWhile((amount, index) => amount > index * 1000);
+             */
+
         }, {
             key: 'SkipWhile',
             value: function SkipWhile() {
@@ -1352,6 +1763,16 @@ var TsLinq;
                     return new TsLinq.Iterators.SkipIterator(_this25._target[Symbol.iterator](), predicate);
                 });
             }
+            /**
+             * Returns a specified number of contiguous elements from the start of a
+             * sequence.
+             *
+             * @param take The number of elements to return.
+             *
+             * @example
+             *     var e = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).Take(3);
+             */
+
         }, {
             key: 'Take',
             value: function Take(take) {
@@ -1363,6 +1784,16 @@ var TsLinq;
                     });
                 });
             }
+            /**
+             * Returns elements from a sequence as long as a specified condition is true.
+             * The element's index is used in the logic of the predicate function.
+             *
+             * @param predicate A function to test each source element for a condition; the second parameter of the function represents the index of the source element.
+             *
+             * @example
+             *     var e = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).TakeWhile(a=> a < 4);
+             */
+
         }, {
             key: 'TakeWhile',
             value: function TakeWhile(predicate) {
@@ -1372,6 +1803,15 @@ var TsLinq;
                     return new TsLinq.Iterators.TakeIterator(_this27._target[Symbol.iterator](), predicate);
                 });
             }
+            /**
+             * Produces the set union of two sequences. Union returns only unique values.
+             *
+             * @param second An IEnumerable<T> whose distinct elements form the second set for the union.
+             *
+             * @example
+             *     var e = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).Union([5,6,7,8,9]);
+             */
+
         }, {
             key: 'Union',
             value: function Union(second) {
@@ -1380,6 +1820,17 @@ var TsLinq;
                     return new TsLinq.Iterators.UnionIteratror(aggregate[Symbol.iterator]());
                 });
             }
+            /**
+             * Filters a sequence of values based on a predicate.
+             *
+             * @param predicate A function to test each source element for a condition;
+             * the second parameter of the function represents the index of the source element.
+             *
+             * @example
+             *     var e = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).Where(a => a % 2 == 1)
+             *     var j = asEnumerable([0, 1, 2, 3, 4, 5, 6, 7]).Where((a,i) => a * i % 2 == 1)
+             */
+
         }, {
             key: 'Where',
             value: function Where() {
@@ -1391,6 +1842,16 @@ var TsLinq;
                     return new TsLinq.Iterators.WhereIteratror(_this28._target[Symbol.iterator](), predicate);
                 });
             }
+            /**
+             * Applies a specified function to the corresponding elements of two sequences, producing a sequence of the results.
+             *
+             * @param second The second input sequence.
+             * @param func A function that specifies how to combine the corresponding elements of the two sequences.
+             *
+             * @example
+             *     var e = asEnumerable(numbers).Zip(words, (first, second) => first + " " + second);
+             */
+
         }, {
             key: 'Zip',
             value: function Zip(second, func) {
