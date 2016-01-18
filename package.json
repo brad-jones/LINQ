@@ -8,7 +8,7 @@
     "type": "git",
     "url": "git+https://github.com/brad-jones/LINQ.git"
   },
-  "main": "dist/linq-ts.js",
+  "main": "dist/ts-linq.js",
   "typescript": {
     "definition": "dist/ts-linq.d.ts"
   },
