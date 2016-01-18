@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/brad-jones/ts-linq.git"
+    "url": "git+https://github.com/brad-jones/LINQ.git"
   },
   "main": "dist/linq-ts.js",
   "typescript": {
