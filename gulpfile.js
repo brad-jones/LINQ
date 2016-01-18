@@ -18,6 +18,23 @@ var
 ;
 
 /**
+ * This task will automatically install all our other third party dependencies.
+ * It is hooked into the npm postinstall script handler.
+ */
+gulp.task('setup', function()
+{
+    // Let gulp know when we are finished
+    var deferred = Q.defer(), complete = 0, done = function()
+    {
+        ++complete; if (complete == 1) deferred.resolve();
+    };
+
+    run('tsd install').exec(done);
+
+    return deferred.promise;
+});
+
+/**
  * Deletes everything inside the dist folder
  * to ensure we don't get stale artifacts.
  */
