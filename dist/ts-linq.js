@@ -9,11 +9,11 @@
 }(this, function(babel) {
 'use strict';
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
@@ -65,9 +65,9 @@ var TsLinq;
             try {
                 // Grab the global scope.
                 // @see: http://goo.gl/Wr6jnG
-                var globalScope = (function () {
+                var globalScope = function () {
                     return this || (1, eval)('this');
-                })();
+                }();
                 // Look for constructor in the global scope
                 var ctor;
                 if (typeof globalScope[type] === 'function') {
@@ -89,7 +89,7 @@ var TsLinq;
 (function (TsLinq) {
     //  Gets Iterator and turns it into Enumerator
 
-    var Enumerator = (function () {
+    var Enumerator = function () {
         function Enumerator(sourceIterator) {
             _classCallCheck(this, Enumerator);
 
@@ -121,7 +121,7 @@ var TsLinq;
         }]);
 
         return Enumerator;
-    })();
+    }();
 
     TsLinq.Enumerator = Enumerator;
 })(TsLinq || (TsLinq = {}));
@@ -143,7 +143,7 @@ var TsLinq;
 (function (TsLinq) {
     var Iterators;
     (function (Iterators) {
-        var MethodIteratror = (function (_Iterators$IteratorBa) {
+        var MethodIteratror = function (_Iterators$IteratorBa) {
             _inherits(MethodIteratror, _Iterators$IteratorBa);
 
             function MethodIteratror(iterator) {
@@ -161,7 +161,7 @@ var TsLinq;
             }
 
             return MethodIteratror;
-        })(Iterators.IteratorBase);
+        }(Iterators.IteratorBase);
 
         Iterators.MethodIteratror = MethodIteratror;
     })(Iterators = TsLinq.Iterators || (TsLinq.Iterators = {}));
@@ -170,7 +170,7 @@ var TsLinq;
 (function (TsLinq) {
     var Iterators;
     (function (Iterators) {
-        var ArrayIterator = (function () {
+        var ArrayIterator = function () {
             function ArrayIterator(_source, _current, _done) {
                 var _increment = arguments.length <= 3 || arguments[3] === undefined ? 1 : arguments[3];
 
@@ -192,7 +192,7 @@ var TsLinq;
             }]);
 
             return ArrayIterator;
-        })();
+        }();
 
         Iterators.ArrayIterator = ArrayIterator;
     })(Iterators = TsLinq.Iterators || (TsLinq.Iterators = {}));
@@ -201,7 +201,7 @@ var TsLinq;
 (function (TsLinq) {
     var Iterators;
     (function (Iterators) {
-        var DefaultIfEmptyIteratror = (function (_Iterators$IteratorBa2) {
+        var DefaultIfEmptyIteratror = function (_Iterators$IteratorBa2) {
             _inherits(DefaultIfEmptyIteratror, _Iterators$IteratorBa2);
 
             function DefaultIfEmptyIteratror(sourceIterator, _default) {
@@ -233,7 +233,7 @@ var TsLinq;
             }]);
 
             return DefaultIfEmptyIteratror;
-        })(Iterators.IteratorBase);
+        }(Iterators.IteratorBase);
 
         Iterators.DefaultIfEmptyIteratror = DefaultIfEmptyIteratror;
     })(Iterators = TsLinq.Iterators || (TsLinq.Iterators = {}));
@@ -242,7 +242,7 @@ var TsLinq;
 (function (TsLinq) {
     var Iterators;
     (function (Iterators) {
-        var DistinctIteratror = (function (_Iterators$IteratorBa3) {
+        var DistinctIteratror = function (_Iterators$IteratorBa3) {
             _inherits(DistinctIteratror, _Iterators$IteratorBa3);
 
             function DistinctIteratror() {
@@ -271,7 +271,7 @@ var TsLinq;
             }]);
 
             return DistinctIteratror;
-        })(Iterators.IteratorBase);
+        }(Iterators.IteratorBase);
 
         Iterators.DistinctIteratror = DistinctIteratror;
     })(Iterators = TsLinq.Iterators || (TsLinq.Iterators = {}));
@@ -280,7 +280,7 @@ var TsLinq;
 (function (TsLinq) {
     var Iterators;
     (function (Iterators) {
-        var GeneratorIterator = (function (_Iterators$IteratorBa4) {
+        var GeneratorIterator = function (_Iterators$IteratorBa4) {
             _inherits(GeneratorIterator, _Iterators$IteratorBa4);
 
             function GeneratorIterator(_current, _count) {
@@ -306,7 +306,7 @@ var TsLinq;
             }]);
 
             return GeneratorIterator;
-        })(Iterators.IteratorBase);
+        }(Iterators.IteratorBase);
 
         Iterators.GeneratorIterator = GeneratorIterator;
     })(Iterators = TsLinq.Iterators || (TsLinq.Iterators = {}));
@@ -315,7 +315,7 @@ var TsLinq;
 (function (TsLinq) {
     var Iterators;
     (function (Iterators) {
-        var GroupByIteratror = (function (_Iterators$MethodIter) {
+        var GroupByIteratror = function (_Iterators$MethodIter) {
             _inherits(GroupByIteratror, _Iterators$MethodIter);
 
             function GroupByIteratror(iterator, resultSelect, _map) {
@@ -338,7 +338,7 @@ var TsLinq;
             }]);
 
             return GroupByIteratror;
-        })(Iterators.MethodIteratror);
+        }(Iterators.MethodIteratror);
 
         Iterators.GroupByIteratror = GroupByIteratror;
     })(Iterators = TsLinq.Iterators || (TsLinq.Iterators = {}));
@@ -347,7 +347,7 @@ var TsLinq;
 (function (TsLinq) {
     var Iterators;
     (function (Iterators) {
-        var GroupJoinIteratror = (function (_Iterators$MethodIter2) {
+        var GroupJoinIteratror = function (_Iterators$MethodIter2) {
             _inherits(GroupJoinIteratror, _Iterators$MethodIter2);
 
             function GroupJoinIteratror(iterator, oKeySelect, _transform, _map) {
@@ -379,7 +379,7 @@ var TsLinq;
             }]);
 
             return GroupJoinIteratror;
-        })(Iterators.MethodIteratror);
+        }(Iterators.MethodIteratror);
 
         Iterators.GroupJoinIteratror = GroupJoinIteratror;
     })(Iterators = TsLinq.Iterators || (TsLinq.Iterators = {}));
@@ -388,7 +388,7 @@ var TsLinq;
 (function (TsLinq) {
     var Iterators;
     (function (Iterators) {
-        var IntersectIteratror = (function (_Iterators$IteratorBa5) {
+        var IntersectIteratror = function (_Iterators$IteratorBa5) {
             _inherits(IntersectIteratror, _Iterators$IteratorBa5);
 
             function IntersectIteratror(iterator, _set) {
@@ -414,7 +414,7 @@ var TsLinq;
             }]);
 
             return IntersectIteratror;
-        })(Iterators.IteratorBase);
+        }(Iterators.IteratorBase);
 
         Iterators.IntersectIteratror = IntersectIteratror;
     })(Iterators = TsLinq.Iterators || (TsLinq.Iterators = {}));
@@ -423,7 +423,7 @@ var TsLinq;
 (function (TsLinq) {
     var Iterators;
     (function (Iterators) {
-        var SelectIteratror = (function (_Iterators$MethodIter3) {
+        var SelectIteratror = function (_Iterators$MethodIter3) {
             _inherits(SelectIteratror, _Iterators$MethodIter3);
 
             function SelectIteratror() {
@@ -443,7 +443,7 @@ var TsLinq;
             }]);
 
             return SelectIteratror;
-        })(Iterators.MethodIteratror);
+        }(Iterators.MethodIteratror);
 
         Iterators.SelectIteratror = SelectIteratror;
     })(Iterators = TsLinq.Iterators || (TsLinq.Iterators = {}));
@@ -452,7 +452,7 @@ var TsLinq;
 (function (TsLinq) {
     var Iterators;
     (function (Iterators) {
-        var SelectManyIteratror = (function (_Iterators$MethodIter4) {
+        var SelectManyIteratror = function (_Iterators$MethodIter4) {
             _inherits(SelectManyIteratror, _Iterators$MethodIter4);
 
             function SelectManyIteratror(sourceIterator, selector) {
@@ -487,7 +487,7 @@ var TsLinq;
             }]);
 
             return SelectManyIteratror;
-        })(Iterators.MethodIteratror);
+        }(Iterators.MethodIteratror);
 
         Iterators.SelectManyIteratror = SelectManyIteratror;
     })(Iterators = TsLinq.Iterators || (TsLinq.Iterators = {}));
@@ -496,7 +496,7 @@ var TsLinq;
 (function (TsLinq) {
     var Iterators;
     (function (Iterators) {
-        var JoinIteratror = (function (_Iterators$SelectMany) {
+        var JoinIteratror = function (_Iterators$SelectMany) {
             _inherits(JoinIteratror, _Iterators$SelectMany);
 
             function JoinIteratror(outer, inner, oKeySelect, iKeySelect, transform) {
@@ -543,7 +543,7 @@ var TsLinq;
             }]);
 
             return JoinIteratror;
-        })(Iterators.SelectManyIteratror);
+        }(Iterators.SelectManyIteratror);
 
         Iterators.JoinIteratror = JoinIteratror;
     })(Iterators = TsLinq.Iterators || (TsLinq.Iterators = {}));
@@ -552,7 +552,7 @@ var TsLinq;
 (function (TsLinq) {
     var Iterators;
     (function (Iterators) {
-        var SkipIterator = (function (_Iterators$MethodIter5) {
+        var SkipIterator = function (_Iterators$MethodIter5) {
             _inherits(SkipIterator, _Iterators$MethodIter5);
 
             function SkipIterator() {
@@ -582,7 +582,7 @@ var TsLinq;
             }]);
 
             return SkipIterator;
-        })(Iterators.MethodIteratror);
+        }(Iterators.MethodIteratror);
 
         Iterators.SkipIterator = SkipIterator;
     })(Iterators = TsLinq.Iterators || (TsLinq.Iterators = {}));
@@ -591,7 +591,7 @@ var TsLinq;
 (function (TsLinq) {
     var Iterators;
     (function (Iterators) {
-        var TakeIterator = (function (_Iterators$MethodIter6) {
+        var TakeIterator = function (_Iterators$MethodIter6) {
             _inherits(TakeIterator, _Iterators$MethodIter6);
 
             function TakeIterator() {
@@ -612,7 +612,7 @@ var TsLinq;
             }]);
 
             return TakeIterator;
-        })(Iterators.MethodIteratror);
+        }(Iterators.MethodIteratror);
 
         Iterators.TakeIterator = TakeIterator;
     })(Iterators = TsLinq.Iterators || (TsLinq.Iterators = {}));
@@ -623,7 +623,7 @@ var TsLinq;
     (function (Iterators) {
         var Constants = TsLinq.Constants;
 
-        var UnionIteratror = (function (_Iterators$SelectMany2) {
+        var UnionIteratror = function (_Iterators$SelectMany2) {
             _inherits(UnionIteratror, _Iterators$SelectMany2);
 
             function UnionIteratror(sourceIterator) {
@@ -646,7 +646,7 @@ var TsLinq;
             }]);
 
             return UnionIteratror;
-        })(Iterators.SelectManyIteratror);
+        }(Iterators.SelectManyIteratror);
 
         Iterators.UnionIteratror = UnionIteratror;
     })(Iterators = TsLinq.Iterators || (TsLinq.Iterators = {}));
@@ -655,7 +655,7 @@ var TsLinq;
 (function (TsLinq) {
     var Iterators;
     (function (Iterators) {
-        var WhereIteratror = (function (_Iterators$MethodIter7) {
+        var WhereIteratror = function (_Iterators$MethodIter7) {
             _inherits(WhereIteratror, _Iterators$MethodIter7);
 
             function WhereIteratror() {
@@ -676,7 +676,7 @@ var TsLinq;
             }]);
 
             return WhereIteratror;
-        })(Iterators.MethodIteratror);
+        }(Iterators.MethodIteratror);
 
         Iterators.WhereIteratror = WhereIteratror;
     })(Iterators = TsLinq.Iterators || (TsLinq.Iterators = {}));
@@ -685,7 +685,7 @@ var TsLinq;
 (function (TsLinq) {
     var Iterators;
     (function (Iterators) {
-        var ZipIteratror = (function (_Iterators$MethodIter8) {
+        var ZipIteratror = function (_Iterators$MethodIter8) {
             _inherits(ZipIteratror, _Iterators$MethodIter8);
 
             function ZipIteratror(first, _second, func) {
@@ -713,14 +713,14 @@ var TsLinq;
             }]);
 
             return ZipIteratror;
-        })(Iterators.MethodIteratror);
+        }(Iterators.MethodIteratror);
 
         Iterators.ZipIteratror = ZipIteratror;
     })(Iterators = TsLinq.Iterators || (TsLinq.Iterators = {}));
 })(TsLinq || (TsLinq = {}));
 var TsLinq;
 (function (TsLinq) {
-    var Linq = (function () {
+    var Linq = function () {
         function Linq(target, factory, arg) {
             _classCallCheck(this, Linq);
 
@@ -1864,13 +1864,13 @@ var TsLinq;
         }]);
 
         return Linq;
-    })();
+    }();
 
     TsLinq.Linq = Linq;
 })(TsLinq || (TsLinq = {}));
 var TsLinq;
 (function (TsLinq) {
-    var OrderedLinq = (function (_TsLinq$Linq) {
+    var OrderedLinq = function (_TsLinq$Linq) {
         _inherits(OrderedLinq, _TsLinq$Linq);
 
         function OrderedLinq(target, factory, equal) {
@@ -1894,7 +1894,7 @@ var TsLinq;
         }]);
 
         return OrderedLinq;
-    })(TsLinq.Linq);
+    }(TsLinq.Linq);
 
     TsLinq.OrderedLinq = OrderedLinq;
 })(TsLinq || (TsLinq = {}));

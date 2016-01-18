@@ -2,7 +2,7 @@
   "name": "ts-linq",
   "description": "LINQ implemented in Typescript",
   "author": "Brad Jones <brad@bjc.id.au>",
-  "version": "0.0.1",
+  "version": "2.0.2",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -16,6 +16,7 @@
     "babel-polyfill": "^6.3.14"
   },
   "devDependencies": {
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.4.0",
     "babel-preset-es2015": "^6.3.13",
     "chai": "^3.4.1",
     "del": "^2.2.0",
@@ -33,6 +34,7 @@
     "merge2": "^0.3.6",
     "mocha": "^2.3.4",
     "q": "^1.4.1",
+    "run-sequence": "^1.1.5",
     "tsd": "^0.6.5",
     "typescript": "^1.7.3"
   }

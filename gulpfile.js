@@ -13,16 +13,17 @@ var
     gitTagV =      require('gulp-tag-version'),
     umd =          require('gulp-umd'),
     replace =      require('gulp-replace'),
-    mocha =        require('gulp-mocha')
+    mocha =        require('gulp-mocha'),
+    runSequence =  require('run-sequence')
 ;
 
 /**
  * Deletes everything inside the dist folder
  * to ensure we don't get stale artifacts.
  */
-gulp.task('clean', function (done)
+gulp.task('clean', function ()
 {
-    del(['./dist/**/*'], done);
+    return del(['./dist/**/*']);
 });
 
 /**
@@ -88,7 +89,7 @@ gulp.task('compile-src', function()
 /**
  * Compiles the typescript tests into javascript.
  */
-gulp.task('compile-tests', function()
+gulp.task('compile-tests', ['compile-src'], function()
 {
     return gulp.src
     ([
@@ -117,7 +118,10 @@ gulp.task('compile-tests', function()
 /**
  * Creates a fresh build from all source files.
  */
-gulp.task('build', ['clean', 'compile-src']);
+gulp.task('build', function(done)
+{
+    runSequence('clean', 'compile-src', done);
+});
 
 /**
  * Runs the mocha/chai unit tests
@@ -176,7 +180,12 @@ gulp.task('tag', ['build', 'bump'], function()
 /**
  * Publishes the npm package to npmjs.com
  */
-gulp.task('publish', ['test','tag'], function(done)
+gulp.task('publish', ['test'], function(done)
+{
+    runSequence('tag', 'pub', done);
+});
+
+gulp.task('pub', function(done)
 {
     run("npm publish").exec(done);
 });
